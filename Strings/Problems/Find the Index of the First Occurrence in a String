@@ -1,0 +1,50 @@
+class Solution {
+public:
+   void lps(vector<int>& ps,int n,string p ){
+    int i =0;
+    int j=1;
+    while(j<n){
+        if(p[i]==p[j]){
+            ps[j]=i+1;
+            i++;
+            j++;
+        }
+        //not match
+        else{
+            if(i==0){
+                ps[j]=0;
+                j++;
+            }
+            else{
+                i=ps[i-1];
+            }
+        }
+    }
+   }
+    int strStr(string haystack, string needle) {
+        int n=min(haystack.length(),needle.length());
+        vector<int> ps(n,0);
+        lps(ps,n,needle);
+        //string matching
+        int i =0;
+        int j=0;
+        while(i<haystack.length() && j<needle.length()){
+            if(haystack[i]==needle[j]){
+                i++;
+                j++;
+            }
+            //not match
+            else{
+                if(j==0){
+                i++;
+                }
+                else{
+              j=ps[j-1];
+            }}
+        }
+ if(j==needle.length()){
+    return i-n;
+ }
+ else return -1;
+    }
+};
